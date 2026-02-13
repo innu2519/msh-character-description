@@ -7,28 +7,23 @@ body {
 }
 
 .main {
-  max-width: 650px;
+  max-width: 900px;
   margin: 20px auto;
   background-color: white;
-  padding: 5vh 5vw 20vh 5vw;
+  padding: 5vh 5vw 10vh 5vw;
   border-radius: 25px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .container {
   text-align: left;
-  width: 100%;
-  max-width: 500px;  /* 好きな最大幅 */
+  max-width: 500px;
   margin: 3vh auto;
   border: solid #ffb6d5 1px;
   border-radius: 15px;
   padding: 1em 2em;
   background-color: #fff7fb;
-  box-sizing: border-box; /* ← これ重要 */
-}
-
-#rslt {
-  font-size: 1.3em;
+  box-sizing: border-box;
 }
 
 .select-area {
@@ -49,9 +44,6 @@ body {
   color: #ff4f9a;
   cursor: pointer;
   appearance: none;
-  background-image: url("images/arrow.png");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
 }
 
 #calc {
@@ -62,7 +54,7 @@ body {
   background-color: #fff0f7;
   color: #ff4f9a;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: 0.2s;
 }
 
 #calc:hover {
@@ -71,47 +63,71 @@ body {
   transform: scale(1.05);
 }
 
-/* キャラ画像 */
+/* ===== 横並びエリア ===== */
+.chara-area {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 50px;
+}
+
 .chara-img {
-  width: 240px;
+  width: 340px;
   height: auto;
-  display: block;
-  margin: 60px auto 0 20px; /* 上20px, 横中央 */
   transition: opacity 0.4s ease;
+
+  margin-top: 80px;
 }
 
 .chara-img.fade-out {
   opacity: 0;
 }
-/* style.cssに追加 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+
+/* ★ ここを修正（幅制限を解除して自然に広げる） */
+#rslt {
+  flex: 1;
+  min-width: 350px;
+  max-width: 650px;
+  text-align: left;
+}
+
+.profile {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.description {
+  white-space: pre-line;
+  line-height: 1.8;
+}
+
+/* ===== スマホ対応 ===== */
+@media (max-width: 768px) {
+  .chara-area {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    opacity: 1;
+
+  #rslt {
+    max-width: 100%;
+    min-width: auto;
   }
 }
 
-h2 {
-  opacity: 0; /* 初期状態は透明 */
-  animation: fadeIn 3s forwards; /* 2秒かけてフェードイン */
-}
-
-/* ローディング画面 */
+/* ===== ローディング画面 ===== */
 #loader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ffd6e0; /* 薄ピンク背景 */
+  background-color: #ffd6e0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /* 縦に積む */
+  flex-direction: column;
   z-index: 9999;
-  opacity: 1;
   transition: opacity 1s ease;
 }
 
@@ -123,11 +139,11 @@ h2 {
 .spinner {
   width: 80px;
   height: 80px;
-  border: 8px solid #ffc0cb; /* 少し濃いピンク */
-  border-top: 8px solid white; /* 白で回転部分 */
+  border: 8px solid #ffc0cb;
+  border-top: 8px solid white;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 20px; /* 円と文字の間隔 */
+  margin-bottom: 20px;
 }
 
 @keyframes spin {
@@ -137,16 +153,16 @@ h2 {
 
 .loading-text {
   color: white;
-  font-size: 1.5rem;          /* 少し大きめで可愛く */
+  font-size: 1.5rem;
   font-weight: 700;
-  text-align: center;
-  font-family: 'Baloo 2', cursive;  /* ← 可愛いフォント */
+  font-family: 'Baloo 2', cursive;
 }
 
+/* ===== ローディングのドット ===== */
 .dots {
-  display: inline-flex;   
-  margin-left: 4px;       /* Loadingとの間隔 */
-  font-family: 'Baloo 2', cursive;  /* ドットも同じフォントで統一 */
+  display: inline-flex;
+  margin-left: 4px;
+  font-family: 'Baloo 2', cursive;
 }
 
 .dot {
@@ -168,4 +184,11 @@ h2 {
     transform: translateY(-8px);
     opacity: 1;
   }
+}
+
+/* 説明文が空でもレイアウト維持 */
+#rslt:empty::before {
+  content: "";
+  display: inline-block;
+  width: 350px;
 }
