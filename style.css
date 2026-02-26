@@ -84,7 +84,6 @@ body {
   opacity: 0;
 }
 
-/* ★ ここを修正（幅制限を解除して自然に広げる） */
 #rslt {
   flex: 1;
   min-width: 350px;
@@ -219,7 +218,7 @@ body {
 
 .profile-card {
   display: flex;
-  align-items: flex-start;  /* ← ここ重要 */
+  align-items: flex-start;  
   gap: 16px;
   background: #f2f2f2;
   padding: 20px;
@@ -237,7 +236,7 @@ body {
   margin: 6px 0 0;
 }
 .profile-text {
-  text-align: left;   /* ← 強制左寄せ */
+  text-align: left;   
 }
 
 .profile-icon {
